@@ -8,8 +8,11 @@ fi
 
 PAGES_REPO="/tmp/url-cycle"
 
-git clone -v --branch gh-pages https://${GH_TOKEN}@github.com/avaly/url-cycle.git $PAGES_REPO
+git config user.name "Travis-CI"
+git config user.email "travis@travis-ci.com"
 
+git clone -v https://${GH_TOKEN}@github.com/avaly/url-cycle.git $PAGES_REPO
 cd $PAGES_REPO
+git checkout gh-pages
 git merge master
 git push origin gh-pages
