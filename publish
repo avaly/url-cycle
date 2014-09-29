@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Do not publish for pull requests
+if [[ "$TRAVIS_PULL_REQUEST" == "true" ]]; then
+	echo "Building docs only for commits on master branch!"
+	exit 0
+fi
+
+PAGES_REPO="/tmp/url-cycle"
+
+git clone -v --branch gh-pages https://${GH_TOKEN}@github.com/avaly/url-cycle.git $PAGES_REPO
+
+cd $PAGES_REPO
+git merge master
+git push origin gh-pages
