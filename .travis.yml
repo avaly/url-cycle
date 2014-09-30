@@ -1,10 +1,10 @@
-language: node_js
-node_js:
-  - '0.10'
+branches:
+  only:
+    - master
 
-cache:
-  directories:
-    - node_modules
+env:
+  global:
+    # GH_TOKEN
+    - secure: ftlDqPwsBHP+7DJgIN7NOvlr9Ql0uEd6jWV1vuQda/JgxQpYLcDsPR5uoFK2MTVt5NlLlS0fi2WFyDxsHuQPYF9UFVt6E1DXXTlRhGhz+hIdSL/1+OKxuCkfRZj5rA9/w8u6baReeuir1KGk1H3Tn2+7XWCVXkJjSB+oXlJpoaM=
 
-# after_success:
-#   - "./publish"
+script: "./publish"

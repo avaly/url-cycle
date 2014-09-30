@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Do not publish for pull requests
+if [[ "$TRAVIS_PULL_REQUEST" == "true" ]]; then
+	echo "Building docs only for commits on master branch!"
+	exit 0
+fi
+
+PAGES_REPO="/tmp/url-cycle"
+
+git config --global user.name "Travis-CI"
+git config --global user.email "travis@travis-ci.com"
+
+git clone -v https://${GH_TOKEN}@github.com/avaly/url-cycle.git $PAGES_REPO
+cd $PAGES_REPO
+git checkout gh-pages
+git merge --ff-only master
+git push origin gh-pages
