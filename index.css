@@ -1,24 +1,59 @@
 body {
 	margin: 0;
 	padding: 0;
+	font-family: sans-serif;
 }
 
 #cycle,
-#cycle > .img,
-#cycle > iframe {
+#cycle .img,
+#cycle iframe {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
 }
-
-#cycle > iframe {
+#cycle iframe {
 	border: 0;
 }
-
-#cycle > .img {
+#cycle .img {
 	background-position: 50% 50%;
 	background-repeat: no-repeat;
 	background-size: contain;
+}
+#cycle .dim {
+	position: absolute;
+	z-index: 9;
+	bottom: 0;
+	font-size: .8rem;
+	padding: .5rem;
+	background: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+	opacity: .4;
+}
+#cycle .dim:hover {
+	opacity: .8;
+}
+#cycle .status {
+	left: 0;
+}
+#cycle .config {
+	right: 0;
+	color: #000;
+	text-decoration: none;
+}
+
+#config {
+	margin: 0 10%;
+}
+#config table {
+	width: 100%;
+}
+#config table caption {
+	font-weight: bold;
+	text-align: left;
+}
+#config table th {
+	font-weight: normal;
+	white-space: nowrap;
 }

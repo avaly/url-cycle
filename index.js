@@ -1,5 +1,7 @@
 /**
- * TODO
+ * URL-Cycle
+ *
+ * Cycles through a configurable list of URLs of sites or images
  */
 
 var app = angular.module('cycleApp', ['ngRoute']);
@@ -22,6 +24,7 @@ app.factory('$shared', function($rootScope) {
 });
 
 app.controller('CycleCtrl', function($scope, $shared, $http, $sce) {
+	$scope.status = '';
 	$scope.entryIndex = -1;
 	$scope.imgActive = [false, false];
 	$scope.imgUrl = ['', ''];
@@ -46,11 +49,16 @@ app.controller('CycleCtrl', function($scope, $shared, $http, $sce) {
 		$scope.$apply();
 	};
 
+	function prepareUrl(url) {
+		return url + (url.indexOf('?') > -1 ? '&' : '?') + 'r=' + Math.random() * 1000000;
+	}
+
 	$scope.showImage = function(url) {
 		$scope.imgIndex = Math.abs($scope.imgIndex - 1);
-		$scope.imgUrl[$scope.imgIndex] = url;
+		$scope.imgUrl[$scope.imgIndex] = prepareUrl(url);
 
 		setTimeout(function() {
+			$scope.status = url;
 			$scope.imgActive[$scope.imgIndex] = true;
 			$scope.imgActive[Math.abs($scope.imgIndex - 1)] = false;
 			$scope.frameActive[0] = false;
@@ -61,15 +69,16 @@ app.controller('CycleCtrl', function($scope, $shared, $http, $sce) {
 
 	$scope.showFrame = function(url) {
 		$scope.frameIndex = Math.abs($scope.frameIndex - 1);
-		$scope.frameUrl[$scope.frameIndex] = $sce.trustAsResourceUrl(url);
+		$scope.frameUrl[$scope.frameIndex] = $sce.trustAsResourceUrl(prepareUrl(url));
 
 		setTimeout(function() {
+			$scope.status = url;
 			$scope.frameActive[$scope.frameIndex] = true;
 			$scope.frameActive[Math.abs($scope.frameIndex - 1)] = false;
 			$scope.imgActive[0] = false;
 			$scope.imgActive[1] = false;
 			$scope.$apply();
-		}, 2000);
+		}, 1000);
 	};
 
 	$http.get($shared.configUrl)
@@ -83,13 +92,27 @@ app.controller('CycleCtrl', function($scope, $shared, $http, $sce) {
 		});
 });
 
-app.controller('ConfigCtrl', function($scope, $shared, $http, $rootScope) {
+app.controller('ConfigCtrl', function($scope, $shared, $http, $rootScope, $location) {
+	$scope.saved = false;
 	$scope.configUrl = $shared.configUrl;
 
+	function items() {
+		$http.get($shared.configUrl)
+			.success(function(data) {
+				$scope.items = data.entries;
+				console.log($scope.items);
+			})
+			.error(function() {
+				console.log('$http.get error', arguments);
+			});
+	}
+	items();
+
 	$scope.save = function(e) {
-		console.log('save', $scope.configUrl);
 		$shared.configUrl = $scope.configUrl;
 		$rootScope.$broadcast('save');
+		$scope.saved = true;
+		items();
 	};
 });
 
@@ -107,7 +130,3 @@ app.config(['$routeProvider', function($routeProvider) {
 			redirectTo: '/cycle'
 		});
 }]);
-
-function init() {
-
-}
