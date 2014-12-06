@@ -30,19 +30,19 @@ app.controller('CycleCtrl', function($scope, $shared, $http, $sce) {
 	$scope.imgUrl = ['', ''];
 	$scope.imgIndex = 1;
 	$scope.frameActive = [false, false];
+	$scope.frameSize = [['100%', '100%'], ['100%', '100%']];
 	$scope.frameUrl = ['', ''];
 	$scope.frameIndex = 1;
 
 	$scope.next = function() {
 		var entry = $scope.entries[++$scope.entryIndex % $scope.entries.length];
 
-		console.log('next', $scope.entryIndex, entry);
-
+		// console.log('next', $scope.entryIndex, entry);
 		if (entry.type === 'img') {
 			$scope.showImage(entry.url);
 		}
 		else {
-			$scope.showFrame(entry.url);
+			$scope.showFrame(entry);
 		}
 
 		setTimeout($scope.next, entry.duration * 1000);
@@ -67,14 +67,18 @@ app.controller('CycleCtrl', function($scope, $shared, $http, $sce) {
 		}, 1000);
 	};
 
-	$scope.showFrame = function(url) {
+	$scope.showFrame = function(entry) {
 		$scope.frameIndex = Math.abs($scope.frameIndex - 1);
-		$scope.frameUrl[$scope.frameIndex] = $sce.trustAsResourceUrl(prepareUrl(url));
+		$scope.frameUrl[$scope.frameIndex] = $sce.trustAsResourceUrl(prepareUrl(entry.url));
 
 		setTimeout(function() {
-			$scope.status = url;
+			$scope.status = entry.url;
 			$scope.frameActive[$scope.frameIndex] = true;
 			$scope.frameActive[Math.abs($scope.frameIndex - 1)] = false;
+			$scope.frameSize[$scope.frameIndex] = [
+				entry.width || '100%',
+				entry.height || '100%'
+			];
 			$scope.imgActive[0] = false;
 			$scope.imgActive[1] = false;
 			$scope.$apply();
@@ -100,7 +104,6 @@ app.controller('ConfigCtrl', function($scope, $shared, $http, $rootScope, $locat
 		$http.get($shared.configUrl)
 			.success(function(data) {
 				$scope.items = data.entries;
-				console.log($scope.items);
 			})
 			.error(function() {
 				console.log('$http.get error', arguments);

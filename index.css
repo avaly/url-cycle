@@ -14,7 +14,10 @@ body {
 	bottom: 0;
 }
 #cycle iframe {
+	top: 50%;
+	left: 50%;
 	border: 0;
+	transform: translate(-50%, -50%);
 }
 #cycle .img {
 	background-position: 50% 50%;

@@ -8,7 +8,9 @@
 		{
 			"type": "url",
 			"url": "http://status.aws.amazon.com/",
-			"duration": 20
+			"duration": 20,
+			"width": "80%",
+			"height": "75%",
 		},
 		{
 			"type": "img",
