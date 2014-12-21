@@ -5,6 +5,6 @@ branches:
 env:
   global:
     # GH_TOKEN
-    - secure: ftlDqPwsBHP+7DJgIN7NOvlr9Ql0uEd6jWV1vuQda/JgxQpYLcDsPR5uoFK2MTVt5NlLlS0fi2WFyDxsHuQPYF9UFVt6E1DXXTlRhGhz+hIdSL/1+OKxuCkfRZj5rA9/w8u6baReeuir1KGk1H3Tn2+7XWCVXkJjSB+oXlJpoaM=
+    - secure: "oIGMI5tlN3Ck4Vnc5wCKGAR/lKWaV0lKCZz/ui/cjzDmqVt/Ie8ThpEZm4nKj/IvCOlBbWPAjUfStyostSDnYrF6JAmthDH4hh7kxbGlRSlb+fJSu1vKJq9XOUGHtgxtyybUgcLGTKraHOM7zBzsW8lbh9+g4QxqgbaWXD7nq/o="
 
 script: "./publish"
