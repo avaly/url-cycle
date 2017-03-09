@@ -7,4 +7,9 @@ env:
     # GH_TOKEN
     - secure: "oIGMI5tlN3Ck4Vnc5wCKGAR/lKWaV0lKCZz/ui/cjzDmqVt/Ie8ThpEZm4nKj/IvCOlBbWPAjUfStyostSDnYrF6JAmthDH4hh7kxbGlRSlb+fJSu1vKJq9XOUGHtgxtyybUgcLGTKraHOM7zBzsW8lbh9+g4QxqgbaWXD7nq/o="
 
-script: "./publish"
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: publish.sh
+    on:
+      branch: master

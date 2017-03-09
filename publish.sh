@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Do not publish for pull requests
-if [[ "$TRAVIS_PULL_REQUEST" == "true" ]]; then
-	echo "Building docs only for commits on master branch!"
-	exit 0
-fi
+set -euo pipefail
+
+function cleanup {
+	rm -f .git/credentials
+}
+trap cleanup EXIT
 
 PAGES_REPO="tmp"
 mkdir $PAGES_REPO
@@ -19,4 +20,5 @@ git config user.email "travis@travis-ci.com"
 
 git checkout gh-pages
 git merge --ff-only master
-git push origin gh-pages
+git --no-pager log -n 3
+git push -f origin gh-pages

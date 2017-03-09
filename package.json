@@ -1,0 +1,17 @@
+{
+  "name": "url-cycle",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:avaly/url-cycle.git",
+  "author": {
+    "name": "Valentin Agachi",
+    "url": "http://agachi.name/"
+  },
+  "scripts": {
+    "start": "http-server"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^0.9.0"
+  }
+}
