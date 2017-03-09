@@ -1,5 +1,7 @@
 # url-cycle
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/avaly/url-cycle.svg)](https://greenkeeper.io/)
+
 [![Flattr](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=avaly&url=https://github.com/avaly/url-cycle&title=url-cycle&language=&tags=github&category=software)
 
 > URL Cycle Tool
