@@ -8,7 +8,7 @@ var app = angular.module('cycleApp', ['ngRoute']);
 
 app.factory('$shared', function($rootScope) {
 	var storage = {
-			configUrl: null
+			configUrl: window.location.origin + '/config.json'
 		},
 		cached = angular.fromJson(localStorage.getItem('cycleApp'));
 
